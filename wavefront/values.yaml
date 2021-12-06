@@ -346,12 +346,6 @@ serviceAccount:
 imagePullSecrets: []
 # - name: secretName
 
-## kube-state-metrics are used to get metrics about the state of the Kubernetes scheduler
-## If enabled the kube-state-metrics chart will be installed as a subchart and the collector
-## will be configured to capture metrics.
-kubeStateMetrics:
-  enabled: false
-
 ## Required for vSphere with Tanzu Kubernetes clusters.
 ## If enabled, a role binding to handle pod security policy will be installed within the Kubernetes cluster.
 vspheretanzu:

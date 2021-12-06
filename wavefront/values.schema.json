@@ -1,0 +1,349 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Welcome2",
+  "definitions": {
+    "Welcome2": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clusterName": {
+          "type": "string"
+        },
+        "wavefront": {
+          "$ref": "#/definitions/Wavefront"
+        },
+        "collector": {
+          "$ref": "#/definitions/Collector"
+        },
+        "proxy": {
+          "$ref": "#/definitions/Proxy"
+        },
+        "rbac": {
+          "$ref": "#/definitions/Rbac"
+        },
+        "serviceAccount": {
+          "$ref": "#/definitions/ServiceAccount"
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "items": {}
+        },
+        "kubeStateMetrics": {
+          "$ref": "#/definitions/KubeStateMetrics"
+        },
+        "vspheretanzu": {
+          "$ref": "#/definitions/KubeStateMetrics"
+        },
+        "projectPacific": {
+          "$ref": "#/definitions/KubeStateMetrics"
+        }
+      },
+      "required": [
+        "clusterName",
+        "collector",
+        "imagePullSecrets",
+        "projectPacific",
+        "proxy",
+        "rbac",
+        "serviceAccount",
+        "vspheretanzu",
+        "wavefront"
+      ],
+      "title": "Welcome2"
+    },
+    "Collector": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "image": {
+          "$ref": "#/definitions/CollectorImage"
+        },
+        "useDaemonset": {
+          "type": "boolean"
+        },
+        "useProxy": {
+          "type": "boolean"
+        },
+        "kubernetesState": {
+          "type": "boolean"
+        },
+        "hostOSMetrics": {
+          "type": "boolean"
+        },
+        "filters": {
+          "$ref": "#/definitions/CollectorFilters"
+        },
+        "cadvisor": {
+          "$ref": "#/definitions/Cadvisor"
+        },
+        "events": {
+          "$ref": "#/definitions/KubeStateMetrics"
+        },
+        "discovery": {
+          "$ref": "#/definitions/Discovery"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources"
+        }
+      },
+      "required": [
+        "cadvisor",
+        "discovery",
+        "enabled",
+        "events",
+        "filters",
+        "hostOSMetrics",
+        "image",
+        "kubernetesState",
+        "resources",
+        "useDaemonset",
+        "useProxy"
+      ],
+      "title": "Collector"
+    },
+    "Cadvisor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "filters": {
+          "$ref": "#/definitions/CadvisorFilters"
+        }
+      },
+      "required": [
+        "enabled",
+        "filters"
+      ],
+      "title": "Cadvisor"
+    },
+    "CadvisorFilters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metricAllowList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "metricAllowList"
+      ],
+      "title": "CadvisorFilters"
+    },
+    "Discovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "enableRuntimeConfigs": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enableRuntimeConfigs",
+        "enabled"
+      ],
+      "title": "Discovery"
+    },
+    "KubeStateMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "KubeStateMetrics"
+    },
+    "CollectorFilters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metricDenyList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tagExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "metricDenyList",
+        "tagExclude"
+      ],
+      "title": "CollectorFilters"
+    },
+    "CollectorImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "pullPolicy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "pullPolicy",
+        "repository",
+        "tag"
+      ],
+      "title": "CollectorImage"
+    },
+    "Resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requests": {
+          "$ref": "#/definitions/Limits"
+        },
+        "limits": {
+          "$ref": "#/definitions/Limits"
+        }
+      },
+      "required": [
+        "limits",
+        "requests"
+      ],
+      "title": "Resources"
+    },
+    "Limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cpu": {
+          "type": "string"
+        },
+        "memory": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cpu",
+        "memory"
+      ],
+      "title": "Limits"
+    },
+    "Proxy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "image": {
+          "$ref": "#/definitions/ProxyImage"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources"
+        },
+        "replicas": {
+          "type": "integer"
+        },
+        "port": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "enabled",
+        "image",
+        "port",
+        "replicas",
+        "resources"
+      ],
+      "title": "Proxy"
+    },
+    "ProxyImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "number"
+        },
+        "pullPolicy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "pullPolicy",
+        "repository",
+        "tag"
+      ],
+      "title": "ProxyImage"
+    },
+    "Rbac": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "create"
+      ],
+      "title": "Rbac"
+    },
+    "ServiceAccount": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "create"
+      ],
+      "title": "ServiceAccount"
+    },
+    "Wavefront": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ]
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "token",
+        "url"
+      ],
+      "title": "Wavefront"
+    }
+  }
+}
