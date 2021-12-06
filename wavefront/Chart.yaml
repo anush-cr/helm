@@ -1,5 +1,6 @@
 apiVersion: v2
-charts.openshift.io/name: wavefront
+annotations:
+  charts.openshift.io/name: wavefront
 name: wavefront
 description: Wavefront Collector for Kubernetes
 kubeVersion: ">= 1.17.0"
